@@ -25,7 +25,7 @@ class TraderscraperPipeline:
         self.db = self.conn[mongodb_database]
         self.collection = self.db[mongodb_table]
 
-        self.db[mongodb_table].delete_many({})
+        self.db[mongodb_table].delete_many({})#clear the database table after restart
 
         #self.collection.create_index([("url", pymongo.TEXT)], name='unique_index', default_language='english')
 
