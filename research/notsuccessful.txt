@@ -1,0 +1,42 @@
+######################################################
+er:requests - https://cointelegraph.com/tags/bitcoin
+######################################################
+#
+######################################################
+#
+
+import requests
+
+headers = {
+    'authority': 'conpletus.cointelegraph.com',
+    'accept': 'application/graphql-response+json, application/graphql+json, application/json, text/event-stream, multipart/mixed',
+    'accept-language': 'en-US,en;q=0.9,ru-BY;q=0.8,ru-RU;q=0.7,ru;q=0.6',
+    'baggage': 'sentry-environment=production,sentry-transaction=tags-slug,sentry-public_key=26d85e1737194cc392dd8f51e66f7082,sentry-trace_id=6b7aad0bed4245059cfbf481437e7a86,sentry-sample_rate=0',
+    'content-type': 'application/json',
+    'origin': 'https://cointelegraph.com',
+    'referer': 'https://cointelegraph.com/',
+    'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-site',
+    'sentry-trace': '6b7aad0bed4245059cfbf481437e7a86-861ae7f0f2909e3a-0',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+}
+
+json_data = {
+    'operationName': 'TickersMetaQuery',
+    'query': 'query TickersMetaQuery($short: String) {\n  locale(short: $short) {\n    tickerMeta {\n      defaultCurrency\n      currencySymbols {\n        name\n        sign\n        __typename\n      }\n      coinSymbols {\n        decimals {\n          value\n          currency\n          __typename\n        }\n        decimalsHeaderMobile {\n          value\n          currency\n          __typename\n        }\n        decimalsHeaderDesktop {\n          value\n          currency\n          __typename\n        }\n        tag {\n          slug\n          __typename\n        }\n        cacheKey\n        id\n        name\n        label\n        slug\n        logo\n        priority\n        guideSlug\n        tickersDesktop\n        tickersMobile\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}',
+    'variables': {
+        'cacheTimeInMS': 3600000,
+        'short': 'en',
+    },
+}
+
+response = requests.post('https://conpletus.cointelegraph.com/v1/', headers=headers, json=json_data)
+
+# Note: json_data will not be serialized by requests
+# exactly as it was in the original request.
+#data = '{"operationName":"TickersMetaQuery","query":"query TickersMetaQuery($short: String) {\\n  locale(short: $short) {\\n    tickerMeta {\\n      defaultCurrency\\n      currencySymbols {\\n        name\\n        sign\\n        __typename\\n      }\\n      coinSymbols {\\n        decimals {\\n          value\\n          currency\\n          __typename\\n        }\\n        decimalsHeaderMobile {\\n          value\\n          currency\\n          __typename\\n        }\\n        decimalsHeaderDesktop {\\n          value\\n          currency\\n          __typename\\n        }\\n        tag {\\n          slug\\n          __typename\\n        }\\n        cacheKey\\n        id\\n        name\\n        label\\n        slug\\n        logo\\n        priority\\n        guideSlug\\n        tickersDesktop\\n        tickersMobile\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}","variables":{"cacheTimeInMS":3600000,"short":"en"}}'
+#response = requests.post('https://conpletus.cointelegraph.com/v1/', headers=headers, data=data)
