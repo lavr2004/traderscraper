@@ -64,9 +64,9 @@ COOKIES_ENABLED = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "traderscraper.pipelines.TraderscraperPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "traderscraper.pipelines.TraderscraperPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -93,3 +93,9 @@ COOKIES_ENABLED = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+#mongoDB database settings options
+MONGODB_URI="localhost"
+MONGODB_PORT=27017
+MONGODB_DATABASE="tradescraper"
+MONGODB_TABLE="news"

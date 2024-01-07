@@ -1,6 +1,8 @@
 import scrapy
-import requests
 import json
+from traderscraper.items import TraderscraperItem
+
+from datetime import datetime
 
 
 class CointelegraphspiderSpider(scrapy.Spider):
@@ -8,7 +10,7 @@ class CointelegraphspiderSpider(scrapy.Spider):
     allowed_domains = ["cointelegraph.com", "conpletus.cointelegraph.com"]
     start_urls = ["https://cointelegraph.com/tags/bitcoin"]
 
-    toRequestCountSnippets = 15#count of snippets to request is must being modular to (15)
+    toRequestCountSnippets = 15#count of snippets to request (value must be modular to (15))
 
     def start_requests(self):
         url = 'https://conpletus.cointelegraph.com/v1/'
@@ -44,14 +46,17 @@ class CointelegraphspiderSpider(scrapy.Spider):
         assert len(postsLst), f"ER - didnt find posts on request {response.url} by attributes {response.attributes} "
 
         for p in postsLst:
+            ti = TraderscraperItem()
+
             area = p.get("postTranslate")
 
-            yield {
-                "url": f'https://cointelegraph.com/news/{str(p.get("slug")).strip()}',
-                "datepost": str(area.get("published")),
-                "category": str(p["postBadge"]["postBadgeTranslates"][0]["title"]),
-                "viewscount": str(p.get("views")),
-                "title": str(area.get("title")).strip(),
-                "description": str(area.get("leadText")).strip(),
-                "author": str(p["author"]["authorTranslates"][0]["name"])
-            }
+            ti["url"] = f'https://cointelegraph.com/news/{str(p.get("slug")).strip()}'
+            ti["datepost"] = datetime.strptime(str(area.get("published")), "%Y-%m-%dT%H:%M:%S%z").isoformat()
+            ti["category"] = str(p["postBadge"]["postBadgeTranslates"][0]["title"])
+            ti["viewscount"] = p.get("views")
+            ti["title"] = str(area.get("title")).strip()
+            ti["descriptionshort"] = str(area.get("leadText")).strip()
+            ti["descriptionfull"] = str()
+            ti["author"] = str(p["author"]["authorTranslates"][0]["name"])
+
+            yield ti

@@ -14,5 +14,6 @@ class TraderscraperItem(scrapy.Item):
     datepost = scrapy.Field()
     category = scrapy.Field()
     viewscount = scrapy.Field()
-    description = scrapy.Field()
+    descriptionshort = scrapy.Field()
+    descriptionfull = scrapy.Field()
     author = scrapy.Field()
