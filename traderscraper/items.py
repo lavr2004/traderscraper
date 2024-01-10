@@ -17,3 +17,5 @@ class TraderscraperItem(scrapy.Item):
     descriptionshort = scrapy.Field()
     descriptionfull = scrapy.Field()
     author = scrapy.Field()
+
+    refkey = scrapy.Field()

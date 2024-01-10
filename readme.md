@@ -136,7 +136,7 @@ response.body
 
 >ss>
 ```
-with open("o.txt",'w', encoding='utf-8-sig') as fw:
+with open("o.txt", "w", encoding="utf-8-sig") as fw:
     fw.write(str(response.body))
 ```
 

@@ -59,4 +59,6 @@ class CointelegraphspiderSpider(scrapy.Spider):
             ti["descriptionfull"] = str()
             ti["author"] = str(p["author"]["authorTranslates"][0]["name"])
 
+            ti["refkey"] = str(p.get("slug")).strip()
+
             yield ti

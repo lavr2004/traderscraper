@@ -1,0 +1,36 @@
+headers = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Accept-Encoding': 'utf-8',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1',
+    'TE': 'Trailers',
+}
+
+url = "https://coinjournal.net/news/"
+
+fetch(url, headers=headers)
+
+#######################################################
+PARSING
+#######################################################
+
+
+newsLst = response.css("div.article-card")
+
+snippet = newsLst[0]
+
+snippet.get()#looking up parsed content
+
+ti["url"] = snippet.css("a").attrib["href"]
+datepost = snippet.css("a span.block::text").get().strip()
+if datepost:
+    ti["datepost"] = datetime.strptime(date_text, "%d %B %Y").isoformat()
+ti["category"] = str(snippet.css("div.article-card__tag span.block::text").get())
+ti["viewscount"] = 0
+ti["title"] = str(snippet.css("a h2.block::text, a h2.block b::text").get()).strip()
+ti["descriptionshort"] = str()
+ti["descriptionfull"] = str()
+ti["author"] = str()
