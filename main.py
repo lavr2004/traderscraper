@@ -7,4 +7,5 @@ from scrapy import cmdline
 
 #scraping additional values from news
 #cmdline.execute("scrapy crawl cointelegraphspiderfulltext".split())#scrape into database
-cmdline.execute("scrapy crawl coinjournalfulltext".split())#scrape into database
+#cmdline.execute("scrapy crawl coinjournalfulltext".split())#scrape into database
+cmdline.execute("scrapy crawl bitcoinmagazinecom".split())#scrape into database

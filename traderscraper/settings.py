@@ -99,3 +99,24 @@ MONGODB_URI="localhost"
 MONGODB_PORT=27017
 MONGODB_DATABASE="tradescraper"
 MONGODB_TABLE="news"
+
+#====================================================================
+#playwright settings
+# DOWNLOAD_HANDLERS = {
+#     "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+#     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+# }
+
+#TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+#====================================================================
+#====================================================================
+#selenium settings
+
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy_selenium.SeleniumMiddleware': 800,
+# }
+#
+# SELENIUM_DRIVER_NAME = 'chrome'
+SELENIUM_DRIVER_EXECUTABLE_PATH = r"G:\My Drive\000_CREATiViTYPROJECTS\0003_CRYPTO-RESEARCH\001_CryptoResearch\002_SCRAPER\traderscraper\traderscraper\chromedriver.exe"
+#SELENIUM_DRIVER_ARGUMENTS = ['--headless']  # enable headless regime
+#====================================================================
