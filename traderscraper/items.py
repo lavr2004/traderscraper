@@ -8,7 +8,6 @@ import scrapy
 
 class TraderscraperItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     title = scrapy.Field()
     url = scrapy.Field()
     datepost = scrapy.Field()
@@ -17,5 +16,7 @@ class TraderscraperItem(scrapy.Item):
     descriptionshort = scrapy.Field()
     descriptionfull = scrapy.Field()
     author = scrapy.Field()
+
+    dateparse = scrapy.Field()
 
     refkey = scrapy.Field()

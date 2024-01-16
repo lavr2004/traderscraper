@@ -8,6 +8,9 @@
 from itemadapter import ItemAdapter
 import pymongo
 from scrapy.exceptions import DropItem
+
+import datetime
+
 #
 class TraderscraperPipeline:
     #indexfield = "url"
@@ -41,7 +44,10 @@ class TraderscraperPipeline:
 
     def process_item(self, item, spider):
         try:
-            self.collection.insert_one(dict(item))
+            d = dict(item)
+            #d["dateparse"] = datetime.datetime.now(datetime.timezone.utc)
+            d["dateparse"] = datetime.datetime.now()
+            self.collection.insert_one(d)
         except pymongo.errors.DuplicateKeyError:
             #version1 - with problem - close current spider if refkey doublicate found - https://stackoverflow.com/questions/46749659/force-spider-to-stop-in-scrapy#:~:text=If%20you%20want%20to%20stop,()%20function%20of%20the%20engine.
             #spider.crawler.engine.close_spider(self, reason='doublicate found')
