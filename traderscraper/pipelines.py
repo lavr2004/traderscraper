@@ -43,6 +43,11 @@ class TraderscraperPipeline:
         try:
             self.collection.insert_one(dict(item))
         except pymongo.errors.DuplicateKeyError:
+            #version1 - with problem - close current spider if refkey doublicate found - https://stackoverflow.com/questions/46749659/force-spider-to-stop-in-scrapy#:~:text=If%20you%20want%20to%20stop,()%20function%20of%20the%20engine.
+            #spider.crawler.engine.close_spider(self, reason='doublicate found')
+
+            #ClosingSpiderOnEvent - version2 - ok - close spider if first refkey doublicate found - https://stackoverflow.com/questions/9699049/how-do-i-stop-all-spiders-and-the-engine-immediately-after-a-condition-in-a-pipe
+            spider.close_down = True
             raise DropItem(f"ER - doublicate: {item[self.indexfield]}")
         return item
 
